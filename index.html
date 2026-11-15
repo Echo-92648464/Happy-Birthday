@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妈妈，生日快乐！</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 30%, #fd79a8 70%, #a29bfe 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 飘落的花瓣 */
+        .petal {
+            position: fixed;
+            top: -50px;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0.3;
+            }
+        }
+
+        /* 主容器 */
+        .container {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        /* 标题动画 */
+        .title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: bounceIn 1.5s ease-out;
+            letter-spacing: 5px;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        /* 蛋糕装饰 */
+        .cake {
+            font-size: 8rem;
+            margin: 20px 0;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* 祝福语卡片 */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .blessing {
+            font-size: 1.3rem;
+            color: #555;
+            line-height: 2;
+            text-align: left;
+        }
+
+        .blessing p {
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        /* 爱心动画 */
+        .heart-container {
+            margin: 20px 0;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .big-heart {
+            font-size: 4rem;
+            color: #e74c3c;
+        }
+
+        /* 装饰元素 */
+        .decorations {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .decor-item {
+            font-size: 2.5rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        .decor-item:nth-child(2) { animation-delay: 0.3s; }
+        .decor-item:nth-child(3) { animation-delay: 0.6s; }
+        .decor-item:nth-child(4) { animation-delay: 0.9s; }
+        .decor-item:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* 底部按钮 */
+        .button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255,107,107,0.4);
+            transition: all 0.3s ease;
+            animation: slideUp 1s ease-out 1s both;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(255,107,107,0.6);
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .title { font-size: 2.5rem; }
+            .cake { font-size: 6rem; }
+            .blessing { font-size: 1.1rem; }
+            .card { padding: 25px; }
+        }
+
+        /* 闪烁星星 */
+        .star {
+            position: fixed;
+            font-size: 15px;
+            color: #fff;
+            animation: twinkle 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 飘落的花瓣 -->
+    <script>
+        const petals = ['🌸', '', '🌷', '🌹', '', '🌻'];
+        for (let i = 0; i < 15; i++) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerText = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            petal.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            document.body.appendChild(petal);
+        }
+
+        // 闪烁的星星
+        for (let i = 0; i < 20; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.innerText = '✨';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <div class="container">
+        <div class="title">🎉 妈妈，生日快乐！ 🎉</div>
+        
+        <div class="cake">🎂</div>
+        
+        <div class="heart-container">
+            <span class="big-heart">❤️</span>
+        </div>
+
+        <div class="card">
+            <div class="blessing">
+                <p>亲爱的妈妈：</p>
+                <p>在这个特别的日子里，我想对您说一声：生日快乐！</p>
+                <p>感谢您一直以来的辛勤付出和无私奉献，
+                您的爱如春风般温暖，如阳光般明媚，
+                照亮了我成长的每一步。</p>
+                <p>愿您永远健康美丽，笑口常开，
+                每一天都充满幸福和快乐！</p>
+                <p>妈妈，我爱您！</p>
+            </div>
+            <div class="signature">
+                —— 爱您的孩子
+            </div>
+        </div>
+
+        <div class="decorations">
+            <span class="decor-item">🎈</span>
+            <span class="decor-item">🎁</span>
+            <span class="decor-item">🌹</span>
+            <span class="decor-item">🎀</span>
+            <span class="decor-item">🎊</span>
+        </div>
+
+        <a href="#" class="button" onclick="alert('妈妈，生日快乐！🎂️'); return false;">
+            送上祝福
+        </a>
+    </div>
+</body>
+</html>
